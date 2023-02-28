@@ -3,6 +3,7 @@ import './App.css'
 import AuthGuard from './guard/auth.guard'
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from './models'
 import { Private, Login } from './pages'
+import { RoutesWithNotFound } from './utilities'
 
 function App() {
   /**
@@ -12,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Routes>
+        <RoutesWithNotFound>
           <Route path='/' element={<Navigate to={PRIVATE_ROUTES.PRIVATE} />} />
           <Route path='*' element={<>NOT FOUND</>} />
           <Route path={PUBLIC_ROUTES.LOGIN} element={<Login />} />
@@ -20,7 +21,7 @@ function App() {
             {/* Esto seria el outlet */}
             <Route path={`${PRIVATE_ROUTES.PRIVATE}/*`} element={<Private />} />
           </Route>
-        </Routes>
+        </RoutesWithNotFound>
       </BrowserRouter>
     </div>
   )
