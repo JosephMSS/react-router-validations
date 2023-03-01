@@ -1,9 +1,10 @@
-import React from 'react'
+import { lazy } from 'react'
 import { BrowserRouter, Navigate, Route } from 'react-router-dom'
 import { PRIVATE_ROUTES } from '../../models'
 import { RoutesWithNotFound } from '../../utilities'
-import { Dashboard } from './Dashboard'
-import { Home } from './Home'
+
+const Dashboard = lazy(() => import('./Dashboard/Dashboard.page'))
+const Home = lazy(() => import('./Home/Home.page'))
 
 export const Private = () => {
   return <RoutesWithNotFound>
@@ -12,3 +13,4 @@ export const Private = () => {
     <Route path={PRIVATE_ROUTES.HOME} element={<Home />} />
   </RoutesWithNotFound>
 }
+export default Private;

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { UserInfo } from "../../models";
 export const EmptyUserState: UserInfo = {
   id: 0,
@@ -15,7 +15,7 @@ export const userSlice = createSlice({
     createUser: (state, action) => {
       return action.payload;
     },
-    updateUser: (state, action) => ({ ...state, ...action.payload }),
+    updateUser: (state, action) => ({ ...current(state), ...action.payload }),
     resetUser: () => EmptyUserState,
   },
 });
