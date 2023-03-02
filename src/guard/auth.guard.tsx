@@ -1,15 +1,25 @@
 import { useSelector } from "react-redux"
 import { Navigate, Outlet } from "react-router-dom"
-import { PUBLIC_ROUTES, UserInfo } from "../models"
+import { PRIVATE_ROUTES, PUBLIC_ROUTES, UserInfo } from "../models"
 import { AppStore } from "../redux/store"
-
-export const AuthGuard = () => {
+interface Props {
+    isPrivate: boolean
+}
+const PrivateValidation = <Outlet />
+const PublicValidation = <Navigate replace to={PRIVATE_ROUTES.PRIVATE} />
+export const AuthGuard = ({ isPrivate }: Props) => {
     const userState = useSelector((store: AppStore) => (store.user))
     /**
      * si tenemos datos retornamos el outlet
      * *Va a ejecutar todas las rutas que estén en su interior 
      */
-    return userState.name ? <Outlet /> : <Navigate replace to={PUBLIC_ROUTES.LOGIN} />
+    if (!userState.name) {
+        return <Navigate replace to={PUBLIC_ROUTES.LOGIN} />
+    }
+    if (!isPrivate) {
+        return PublicValidation
+    }
+    return PrivateValidation
 }
 export default AuthGuard
 

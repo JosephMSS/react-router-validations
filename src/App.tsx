@@ -4,7 +4,9 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import { Logout } from './components/Logout'
 import AuthGuard from './guard/auth.guard'
+import RoleGuard from './guard/role.guard'
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from './models'
+import { ROLES } from './models/rol.model'
 import store from './redux/store'
 import { RoutesWithNotFound } from './utilities'
 /**
@@ -26,7 +28,11 @@ function App() {
             <RoutesWithNotFound>
               <Route path='/' element={<Navigate to={PRIVATE_ROUTES.PRIVATE} />} />
               <Route path={PUBLIC_ROUTES.LOGIN} element={<Login />} />
-              <Route element={<AuthGuard />}>
+              <Route element={<AuthGuard isPrivate={true} />}>
+                {/* Esto seria el outlet */}
+                <Route path={`${PRIVATE_ROUTES.PRIVATE}/*`} element={<Private />} />
+              </Route>
+              <Route element={<RoleGuard rol={ROLES.ADMIN} />}>
                 {/* Esto seria el outlet */}
                 <Route path={`${PRIVATE_ROUTES.PRIVATE}/*`} element={<Private />} />
               </Route>
