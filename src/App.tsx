@@ -23,7 +23,6 @@ function App() {
           <BrowserRouter>
             <RoutesWithNotFound>
               <Route path='/' element={<Navigate to={PRIVATE_ROUTES.PRIVATE} />} />
-              <Route path='*' element={<>NOT FOUND</>} />
               <Route path={PUBLIC_ROUTES.LOGIN} element={<Login />} />
               <Route element={<AuthGuard />}>
                 {/* Esto seria el outlet */}

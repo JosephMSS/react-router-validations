@@ -7,10 +7,11 @@ const Dashboard = lazy(() => import('./Dashboard/Dashboard.page'))
 const Home = lazy(() => import('./Home/Home.page'))
 
 export const Private = () => {
-  return <RoutesWithNotFound>
-    <Route path='/' element={<Navigate to={PRIVATE_ROUTES.PRIVATE} />} />
+  return (
+  <RoutesWithNotFound>
+    <Route path='/' element={<Navigate to={PRIVATE_ROUTES.DASHBOARD} />} />
     <Route path={PRIVATE_ROUTES.DASHBOARD} element={<Dashboard />} />
     <Route path={PRIVATE_ROUTES.HOME} element={<Home />} />
-  </RoutesWithNotFound>
+  </RoutesWithNotFound>)
 }
 export default Private;
