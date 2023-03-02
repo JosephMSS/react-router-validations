@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
+import { Logout } from './components/Logout'
 import AuthGuard from './guard/auth.guard'
 import { PRIVATE_ROUTES, PUBLIC_ROUTES } from './models'
 import store from './redux/store'
@@ -21,6 +22,7 @@ function App() {
       <Suspense fallback={<>Cargando...</>}>
         <Provider store={store}>
           <BrowserRouter>
+            <Logout />
             <RoutesWithNotFound>
               <Route path='/' element={<Navigate to={PRIVATE_ROUTES.PRIVATE} />} />
               <Route path={PUBLIC_ROUTES.LOGIN} element={<Login />} />

@@ -11,6 +11,9 @@ export const Login = () => {
         try {
             const result = await getMorty()
             dispatch(createUser(result))
+            /**
+             * 
+             */
             navigate(`/${PRIVATE_ROUTES.PRIVATE}`, { replace: true });
         } catch (error) {
 
